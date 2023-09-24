@@ -79,21 +79,15 @@ export const Todo = () => {
 
   const HandleComplete = async (TodoId) => {
   
-     
-
-
-
-
-
-
-    // let complete = todosArray.map((Tododata) => {
-    //   if (Tododata.id === TodoId) {
-    //     return {status: !Tododata.status };
-    //   }
-    //   return Tododata;
-    // });
-    // setTodosArray(complete);
-  };
+     const respone = await axios("http://localhost:4000/api/todos/complete",{
+       method : "PUT",
+       data : {
+        TodoId : TodoId
+       }
+     })
+    console.log(respone.data,"data ");
+    setTodosArray(respone.data);
+  }
 
   /-------------------------------------------------------------------------------------/;
   //TODO EDIT SECTION//
@@ -145,20 +139,6 @@ export const Todo = () => {
     setEditButtonStatus("");
   };
 
-
-
-
-
-
-
-
-
-  // const updatedaTodoList = todosArray.filter((Tododata) => {
-  //   if (Tododata.id === TodoId) {
-  //     return {TodoList: editedInputValues[TodoId] };
-  //   }
-  //   return Tododata;
-  // })
 
   /---------------------------------------------------------------------------------------/;
   // TODO CHANGED VALUE HANDLING SECTION //

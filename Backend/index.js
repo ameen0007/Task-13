@@ -31,13 +31,21 @@ app.post("/api/todo",(req,res)=>{
    
       todos[index].TodoList = editedInputValues[TodoId];
       res.json(todos);
-  
-    
+
 })
 
-
-
-
+app.put("/api/todos/complete",(req,res)=>{
+   
+    const {TodoId} = req.body
+    const index = todos.findIndex((todo)=> todo.id === TodoId)
+        
+            todos[index].status = !todos[index].status;
+         
+         console.log(todos,"===after status");
+    res.json(todos);
+        
+   })
+     
 app.delete("/api/todo",(req,res)=>{
     const { todosArray, TodoId} = req.body
    const newarray = todosArray.filter((data)=> data.id !== TodoId )
