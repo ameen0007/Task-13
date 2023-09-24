@@ -1,44 +1,38 @@
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import "./todo.css";
 import { Todoinput } from "../Todoinput/Todoinput";
-import axios from 'axios';
-
+import axios from "axios";
 
 /*-------------------------------------////-----------------------------------*/
 
 export const Todo = () => {
   /-----------------------States----------------------/;
-  
+
   const [userInputData, setUserInputData] = useState("");
-  const  [todosArray, setTodosArray] = useState([])
+  const [todosArray, setTodosArray] = useState([]);
   const [inputSectionStatus, setInputSectionStatus] = useState(false);
   const [editButtonStatus, setEditButtonStatus] = useState(null);
   const [editedInputValues, setEditedInputValues] = useState({});
-  
- 
-
-
 
   const HandleFetchInput = (event) => {
     setUserInputData(event.target.value);
   };
 
   /--------------------------------------------------------------------------/;
- 
-  //initial call//
-   
-  useEffect(() => {
-    Fetchtodosfromserver()
-  }, [])
 
-  const Fetchtodosfromserver = async ()=>{
-    const respone = await axios("http://localhost:4000/api/todo")
-    setTodosArray(respone.data)
-    console.log(todosArray,"setted");
-    
-  }
-  
-   //ADD NEW TODO//
+  //initial call//
+
+  useEffect(() => {
+    Fetchtodosfromserver();
+  }, []);
+
+  const Fetchtodosfromserver = async () => {
+    const respone = await axios("http://localhost:4000/api/todo");
+    setTodosArray(respone.data);
+    console.log(todosArray, "setted");
+  };
+
+  //ADD NEW TODO//
 
   const AddTodo = async () => {
     if (userInputData === "") {
@@ -47,16 +41,18 @@ export const Todo = () => {
         setInputSectionStatus(false);
       }, 800);
     } else {
-      const respone = await axios("http://localhost:4000/api/todo",{
-        method : "POST",
-        data : {
-          userInputData : userInputData
+      const respone = await axios("http://localhost:4000/api/todo", {
+        method: "POST",
+        data: {
+          userInputData: userInputData,
         },
-       })
-       setTodosArray(respone.data)
-        Fetchtodosfromserver()
-       setUserInputData("");
-   
+      });
+
+      if (respone.data) {
+        setTodosArray(respone.data);
+        Fetchtodosfromserver();
+        setUserInputData("");
+      }
     }
   };
 
@@ -64,51 +60,46 @@ export const Todo = () => {
   //TODO DELETE FUNCTION//
 
   const HandleDelete = async (TodoId) => {
-    const response = await axios("http://localhost:4000/api/todo",{
-      method : "DELETE",
-      data : {
-        todosArray : todosArray,
-        TodoId : TodoId
-      }
-    })
-    console.log(todosArray,"====frontend array");
-    setTodosArray(response.data)
+    const response = await axios("http://localhost:4000/api/todo", {
+      method: "DELETE",
+      data: {
+        todosArray: todosArray,
+        TodoId: TodoId,
+      },
+    });
+    console.log(todosArray, "====frontend array");
+    setTodosArray(response.data);
   };
-/---------------------------------------------------------------------------------------/
-//TODO COMPLETE
+  /---------------------------------------------------------------------------------------/;
+  //TODO COMPLETE
 
   const HandleComplete = async (TodoId) => {
-  
-     const respone = await axios("http://localhost:4000/api/todos/complete",{
-       method : "PUT",
-       data : {
-        TodoId : TodoId
-       }
-     })
-    console.log(respone.data,"data ");
+    const respone = await axios("http://localhost:4000/api/todos/complete", {
+      method: "PUT",
+      data: {
+        TodoId: TodoId,
+      },
+    });
+    console.log(respone.data, "data ");
     setTodosArray(respone.data);
-  }
+  };
 
   /-------------------------------------------------------------------------------------/;
   //TODO EDIT SECTION//
 
-  const HandleEdit = async(TodoId) => {
+  const HandleEdit = async (TodoId) => {
     if (editButtonStatus === TodoId) {
       setEditButtonStatus(null);
-    }else{
+    } else {
       setEditButtonStatus(TodoId);
-      const userclikedtodo = todosArray.find((Tododata) => Tododata.id === TodoId);
-        setEditedInputValues(
-             {
-             [TodoId]: userclikedtodo.TodoList,
-             }
-        )
-
-
-  }
-}
-
-  
+      const userclikedtodo = todosArray.find(
+        (Tododata) => Tododata.id === TodoId
+      );
+      setEditedInputValues({
+        [TodoId]: userclikedtodo.TodoList,
+      });
+    }
+  };
 
   /-----------------------------------------------------------------------------------/;
   //TODO EDIT CANCEL SECTION//
@@ -118,27 +109,21 @@ export const Todo = () => {
     setUserInputData("");
   };
 
-
-
-
   /--------------------------------------------------------------------------------------/;
   //TODO EDIT SAVE SECTION//
 
   const HandleSave = async (TodoId) => {
-   
-    const respone = await axios("http://localhost:4000/api/todo",{
-      method : "PUT",
-      data : {
-        TodoId : TodoId,
-        editedInputValues : editedInputValues,
-      } 
-      
-    })
-    console.log(respone.data,"==response data");
+    const respone = await axios("http://localhost:4000/api/todo", {
+      method: "PUT",
+      data: {
+        TodoId: TodoId,
+        editedInputValues: editedInputValues,
+      },
+    });
+    console.log(respone.data, "==response data");
     setTodosArray(respone.data);
     setEditButtonStatus("");
   };
-
 
   /---------------------------------------------------------------------------------------/;
   // TODO CHANGED VALUE HANDLING SECTION //
@@ -151,7 +136,6 @@ export const Todo = () => {
   };
   /--------------------------------------------------------------------------------------------/;
   return (
-   
     <div className="main-div">
       <div className="background">
         <div className="back-div"></div>
@@ -162,11 +146,9 @@ export const Todo = () => {
             AddTodo={AddTodo}
             userInputData={userInputData}
           />
-             {/* ----------------------------------------------------------------- */}
+          {/* ----------------------------------------------------------------- */}
           {todosArray.map((Tododata) => (
-            
             <div className="list-container" key={Tododata.id}>
-
               {/*----------------------------------------------------------------*/}
 
               {editButtonStatus != null && editButtonStatus === Tododata.id ? (
@@ -189,9 +171,9 @@ export const Todo = () => {
                     <button onClick={HandleCancel}>Cancel</button>
                   </div>
                 </div>
-      // -------------------------------   
               ) : (
-      //  ------------------------------         
+                // -------------------------------
+                //  ------------------------------
                 <>
                   <div
                     onClick={() => HandleComplete(Tododata.id)}
@@ -230,5 +212,4 @@ export const Todo = () => {
       </div>
     </div>
   );
-}
-
+};
