@@ -186,13 +186,13 @@ export const Todo = () => {
                     className="img1"
                     onClick={() => HandleEdit(Tododata.id)}
                   >
-                    <img src="src\assets\image 7.png" alt="" />
+                    <img src="image 7.png" alt="" />
                   </button>
                   <button
                     onClick={() => HandleDelete(Tododata.id)}
                     className="img2"
                   >
-                    <img src="src\assets\image 9.png" alt="" />
+                    <img src="image 9.png" alt="" />
                   </button>
                 </>
               )}

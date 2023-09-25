@@ -19,7 +19,7 @@
   width: 100%;
   height: 100vh;
   border: 0px solid rgba(255, 255, 255, 0.2);
-  background: url("C:/Users/ameen/Desktop/Todo-app/Todoapp/src/assets/Desktop - 2.png"),
+  background: url("/Frontend/public/Desktop\ -\ 2.png"),
     linear-gradient(to bottom right, #152431 0%, rgba(21, 36, 49, 0) 50%) bottom
       right / 50% 50% no-repeat,
     linear-gradient(to bottom left, #152431 0%, rgba(21, 36, 49, 0) 50%) bottom
