@@ -4,11 +4,21 @@
       { "src": "index.js", "use": "@vercel/node" }
     ],
     "routes": [
-      { "src": "/api/(.*)", "dest": "/index.js" },
-      { "src": "/(.*)", "dest": "/404.html" }
+      { "src": "/api/todo", "dest": "/index.js" },
+      { "src": "/api/todo/*", "dest": "/index.js" },
+      { "src": "/api/todos/complete", "dest": "/index.js" },
+      { "src": "/api/todos/complete/*", "dest": "/index.js" },
+      { "src": "/api/todo/*", "dest": "/index.js" },
+      { "src": "/api/todo", "dest": "/index.js" },
+      { "src": "/api/todo/*", "dest": "/index.js" },
+      { "src": "/api/todos/complete", "dest": "/index.js" },
+      { "src": "/api/todos/complete/*", "dest": "/index.js" },
+      { "src": "/api/todo", "dest": "/index.js" },
+      { "src": "/api/todo/*", "dest": "/index.js" },
+      { "src": "/api/todos/complete", "dest": "/index.js" },
+      { "src": "/api/todos/complete/*", "dest": "/index.js" }
     ]
   }
-  
   
   
   
