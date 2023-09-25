@@ -4,7 +4,14 @@ const PORT = 3000;
 const { checkwanteditems } = require("./utlities");
 
 const cors = require("cors");
-app.use(cors());
+app.use(cors(
+    {
+      origin : ["https://todo-app-client-psi.vercel.app"],
+      methods : ["GET","POST","PUT","DELETE"],
+      credentials : true
+    }
+
+));
 app.use(express.json());
 let todos = [];
 
