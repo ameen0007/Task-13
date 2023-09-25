@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const PORT = 3000;
 const { checkwanteditems } = require("./utlities");
 
 const cors = require("cors");
@@ -67,7 +68,4 @@ app.delete("/api/todo", (req, res) => {
   console.log(todos, "==main todos array");
 });
 
-const PORT = 4000;
-app.listen(PORT,(req,res)=>{
-  res.json({message : "server started"})
-})
+app.listen(PORT)

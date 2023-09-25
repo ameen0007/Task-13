@@ -27,7 +27,7 @@ export const Todo = () => {
   }, []);
 
   const Fetchtodosfromserver = async () => {
-    const respone = await axios("http://localhost:4000/api/todo");
+    const respone = await axios("todo-app-server-sooty.vercel.app/api/todo");
     setTodosArray(respone.data);
     console.log(todosArray, "setted");
   };
@@ -41,7 +41,7 @@ export const Todo = () => {
         setInputSectionStatus(false);
       }, 800);
     } else {
-      const respone = await axios("http://localhost:4000/api/todo", {
+      const respone = await axios("todo-app-server-sooty.vercel.app/api/todo", {
         method: "POST",
         data: {
           userInputData: userInputData,
@@ -60,7 +60,7 @@ export const Todo = () => {
   //TODO DELETE FUNCTION//
 
   const HandleDelete = async (TodoId) => {
-    const response = await axios("http://localhost:4000/api/todo", {
+    const response = await axios("todo-app-server-sooty.vercel.app/api/todo", {
       method: "DELETE",
       data: {
         todosArray: todosArray,
@@ -74,7 +74,7 @@ export const Todo = () => {
   //TODO COMPLETE
 
   const HandleComplete = async (TodoId) => {
-    const respone = await axios("http://localhost:4000/api/todos/complete", {
+    const respone = await axios("todo-app-server-sooty.vercel.app/api/todos/complete", {
       method: "PUT",
       data: {
         TodoId: TodoId,
@@ -113,7 +113,7 @@ export const Todo = () => {
   //TODO EDIT SAVE SECTION//
 
   const HandleSave = async (TodoId) => {
-    const respone = await axios("http://localhost:4000/api/todo", {
+    const respone = await axios("todo-app-server-sooty.vercel.app/api/todo", {
       method: "PUT",
       data: {
         TodoId: TodoId,
