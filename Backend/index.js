@@ -67,6 +67,7 @@ app.delete("/api/todo", (req, res) => {
   console.log(todos, "==main todos array");
 });
 
-app.listen(4000, () => {
-  console.log("server started");
+const PORT = 4000;
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });
