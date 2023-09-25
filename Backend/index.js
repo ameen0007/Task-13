@@ -68,6 +68,6 @@ app.delete("/api/todo", (req, res) => {
 });
 
 const PORT = 4000;
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
-});
+app.listen(PORT,(req,res)=>{
+  res.json({message : "server started"})
+})
